@@ -1,7 +1,7 @@
 #ifndef SCROLL_H
 #define SCROLL_H
 
-#define SCREEN_WIDTH 80
+#define SCREEN_WIDTH 52
 #define SCREEN_HEIGHT 24
 
 #include "editor.h"

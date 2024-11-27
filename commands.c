@@ -9,7 +9,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-extern wchar_t text_buffer[1024][1024]; // 引用编辑缓冲区
 // 引用全局变量
 extern char command_buffer[COMMAND_BUFFER_SIZE];
 extern int cursor_x, cursor_y;

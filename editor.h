@@ -5,8 +5,8 @@
 #include <wchar.h>
 #include <stdbool.h>
 
-#define MAX_LINE_LENGTH 1024
-#define MAX_LINES 1024
+#define MAX_LINE_LENGTH 51
+#define MAX_LINES 24
 #define HISTORY_SIZE 100
 
 extern int scroll_x;

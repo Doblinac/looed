@@ -28,7 +28,7 @@ Mode current_mode = NORMAL_MODE; // 初始为 Normal 模式
 // 全局变量
 char editor_filename[256] = {'\0'}; // 编辑器文件名
 char command_buffer[1024] = {'\0'};      // 命令输入缓冲
-int cursor_x = 0, cursor_y = 0, max_lines = 0;
+int max_lines = 0;
 
 // 获取当前模式
 Mode get_mode() {

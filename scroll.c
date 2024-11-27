@@ -10,7 +10,7 @@
 #include <string.h>
 #include <ncurses.h>
 
-#define SCREEN_WIDTH 80
+#define SCREEN_WIDTH 52
 #define SCREEN_HEIGHT 24
 
 int scroll_x = 0;
@@ -22,10 +22,8 @@ void scroll_up() {
     }
 }
 
-void scroll_down() {
-    if (scroll_y < max_lines - SCREEN_HEIGHT) {
-        scroll_y++;
-    }
+void scroll_down() { 
+        wscrl(editor_win, 1);
 }
 
 void scroll_left() {
@@ -89,7 +87,7 @@ void insert_char(wchar_t ch) {
     // 行数达到限制，需要进行滚屏操作
     else if (max_lines == MAX_LINES) {
         // 滚动所有行向上
-        scroll_up();
+        scroll_down();
 
         // 在最后一行插入新字符
         text_buffer[max_lines - 1][0] = ch;
@@ -104,5 +102,5 @@ void insert_char(wchar_t ch) {
         fprintf(stderr, "Error: Maximum line count exceeded\n");
     }
 
-    render_screen();
+    render_editor_win();
 }

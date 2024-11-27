@@ -15,6 +15,7 @@ int main(int argc, char *argv[]) {
     noecho();               // 禁用自动回显
     keypad(stdscr, TRUE);   // 启用功能键
     curs_set(1);            // 显示光标
+    scrollok(editor_win, TRUE);
 
     // 初始化编辑器
     init_editor();
