@@ -1,10 +1,50 @@
+# Makefile for the text editor project
+
+# Compiler
 CC = gcc
-CFLAGS = -lncursesw
 
-all: vim_editor
+# Compiler flags
+CFLAGS = -Wall -Wextra -g
 
-vim_editor: main.c editor.c commands.c render.c clipboard.c editor_normal.c editor_insert.c utils.c scroll.c
-	$(CC) main.c editor.c editor_normal.c editor_insert.c utils.c commands.c render.c clipboard.c scroll.c -o vim_editor $(CFLAGS)
+# Linker flags
+LDFLAGS = -lncurses
 
+# Source files
+SRCS = main.c rope.c editor.c normal.c insert.c command.c search.c
+# Object files
+OBJS = $(SRCS:.c=.o)
+
+# Executable name
+EXEC = looed
+
+# Default target
+all: $(EXEC)
+
+# Rule to build the executable
+$(EXEC): $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+
+# Rule to compile .c files to .o files
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Clean up object files and the executable
 clean:
-	rm -f vim_editor
+	rm -f $(OBJS) $(EXEC)
+
+# Run the program
+#run: all
+#	./$(EXEC)
+
+# Run the program with a specific file
+#run-file: all
+#	./$(EXEC) $<
+
+# Help message
+help:
+	@echo "Usage:"
+	@echo "  make all       - Compile the project"
+	@echo "  make clean     - Remove object files and executable"
+	@echo "  make run       - Run the program"
+	@echo "  make run-file  - Run the program with a specific file"
+	@echo "  make help      - Show this help message"

@@ -1,19 +1,13 @@
+// editor.h
 #ifndef EDITOR_H
 #define EDITOR_H
 
 #include <ncurses.h>
-#include <wchar.h>
-#include <stdbool.h>
-
-#define MAX_LINE_LENGTH 51
-#define MAX_LINES 24
-#define HISTORY_SIZE 100
-
-extern int scroll_x;
-extern int scroll_y;
-extern int cursor_x;
-extern int cursor_y;
-extern int max_lines;
+#include "rope.h"
+#include "normal.h"
+#include "command.h"
+#include "insert.h"
+#include "search.h"
 
 typedef enum {
     NORMAL_MODE,
@@ -21,17 +15,33 @@ typedef enum {
     COMMAND_MODE
 } Mode;
 
-extern Mode current_mode;
-extern char editor_filename[256];
-extern wchar_t text_buffer[MAX_LINES][MAX_LINE_LENGTH];
-extern char command_buffer[1024];
-extern int cursor_x, cursor_y, max_lines;
+typedef struct {
+    WINDOW *editor_win;
+    WINDOW *status_win;
+    WINDOW *line_num_win;
+    WINDOW *command_win;
+    WINDOW *top_border_win;
+    WINDOW *bottom_border_win;
+    Rope *buffer;
+    char filename[100];
+    int cursor_x;
+    int cursor_y;
+    Mode mode;
+    int max_y;
+    int max_x;
+} Editor;
 
-void set_mode(Mode mode);
-Mode get_mode();
-void render_screen();
-void open_file(const char *filename);
-void save_file(const char *filename);
+extern Editor *editor;
+extern char command[100];
+
+void init_editor();
 void cleanup_editor();
+void render_editor();
+void render_status();
+void render_command();
+void render_top_and_bottom();
+void render_screen() ;
+int get_mode();
+void set_mode(Mode mode);
 
 #endif // EDITOR_H
